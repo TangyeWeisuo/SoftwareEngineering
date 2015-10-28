@@ -1,13 +1,21 @@
 # SoftwareEngineering
-Project Name:教师信息管理系统
-## Group mates' information:
-Leader:
+项目名称:教师信息管理系统
+## 项目人员:
+
+### 成员信息:
+组长:
 唐航
 
-Members:
+组员:
 刘镇武、洪凯伦、赵西航
 
-## Teacher's information:
-Name:刘铭
+### 教师信息:
+姓名:刘铭
 
 Email:liuming1981@hit.edu.cn
+
+## 项目进度:
+
+### 2014.10.28:
+初步将网站分为2部分，学生和教师部分
+首先建立了数据库和表格，用于保存信息
