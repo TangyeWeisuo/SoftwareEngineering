@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f1238f20-b28a-4743-8c65-c895fd4603dc" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Student/models.py" afterPath="$PROJECT_DIR$/Student/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Teacher/models.py" afterPath="$PROJECT_DIR$/Teacher/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SoftwareEngineering.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -64,11 +62,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Administrator/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.23982558">
-              <caret line="11" column="60" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="11" selection-end-column="60" />
               <folding>
                 <element signature="e#109#146#1" expanded="true" />
               </folding>
@@ -76,11 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Student/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
+            <state vertical-scroll-proportion="0.30523255">
+              <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
               <folding>
                 <element signature="e#112#149#1" expanded="true" />
               </folding>
@@ -140,8 +138,8 @@
         <option value="$PROJECT_DIR$/Teacher/urls.py" />
         <option value="$PROJECT_DIR$/Student/urls.py" />
         <option value="$PROJECT_DIR$/Teacher/models.py" />
-        <option value="$PROJECT_DIR$/Student/models.py" />
         <option value="$PROJECT_DIR$/Administrator/models.py" />
+        <option value="$PROJECT_DIR$/Student/models.py" />
       </list>
     </option>
   </component>
@@ -667,16 +665,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Student/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="47" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
-          <folding>
-            <element signature="e#112#149#1" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Teacher/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -690,10 +678,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Administrator/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23982558">
-          <caret line="11" column="60" selection-start-line="11" selection-start-column="60" selection-end-line="11" selection-end-column="60" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="11" selection-end-column="60" />
           <folding>
             <element signature="e#109#146#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Student/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30523255">
+          <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
+          <folding>
+            <element signature="e#112#149#1" expanded="true" />
           </folding>
         </state>
       </provider>
