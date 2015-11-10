@@ -1,23 +1,15 @@
 # -*-coding:utf-8-*-
 from django.db import models
-
-import Teacher
-from Student import *
-from Teacher import *
-
-
-# Create your models here.
-# class User(models.Model):
-#     '''
-#     The model of account.
-#     '''
-#     username = models.CharField(max_length=10)          # 用户名
-#     password = models.CharField(max_length=15)          # 密码
-#     email = models.EmailField(max_length=20)            # 邮箱
+# from Teacher import *
+# from Student import *
+from Teacher.models import Teacher
+from Student.models import Student
 
 
 # Check the true information of each registering user before creating account.
 # Fill the basic information of each student according to the true information.
+
+
 class StudentList(models.Model):
     # The model of each student's true information.
     ID = models.CharField(max_length=10)                # 学生学号
@@ -29,11 +21,11 @@ class StudentList(models.Model):
 class Message(models.Model):
     # The model of message, includes the content, writer and receiver.
     content = models.TextField()                        # 消息内容
-    writer = models.ForeignKey()                        # 消息发出者
-    receiver = models.ForeignKey()                      # 消息接收者
+    teacher = models.ForeignKey(Teacher)                # 教师
+    student = models.ForeignKey(Student)                # 学生
 
 
 class OpenMessage(models.Model):
     # The model of message which are seen to all users.
     content = models.TextField()                        # 消息内容
-    writer = models.ForeignKey()                        # 消息发出者(教师)
+    teacher = models.ForeignKey(Teacher)                # 消息发出者(教师)
