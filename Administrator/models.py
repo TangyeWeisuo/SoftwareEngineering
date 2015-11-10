@@ -1,6 +1,10 @@
 # -*-coding:utf-8-*-
 from django.db import models
 
+import Teacher
+from Student import *
+from Teacher import *
+
 
 # Create your models here.
 # class User(models.Model):
@@ -27,3 +31,9 @@ class Message(models.Model):
     content = models.TextField()                        # 消息内容
     writer = models.ForeignKey()                        # 消息发出者
     receiver = models.ForeignKey()                      # 消息接收者
+
+
+class OpenMessage(models.Model):
+    # The model of message which are seen to all users.
+    content = models.TextField()                        # 消息内容
+    writer = models.ForeignKey()                        # 消息发出者(教师)
