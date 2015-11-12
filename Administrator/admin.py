@@ -3,9 +3,9 @@ from .models import *
 
 
 class StudentListAdmin(admin.ModelAdmin):
-    list_display = ('ID', 'name', 'grade', 'gender')
+    list_display = ('studentID', 'name', 'grade', 'gender')
     fieldsets = [
-        ('ID', {'fields': ['ID']}),
+        ('studentID', {'fields': ['studentID']}),
         ('name', {'fields': ['name']}),
         ('grade', {'fields': ['grade']}),
         ('gender', {'fields': ['gender']}),
@@ -26,6 +26,8 @@ class OpenMessageAdmin(admin.ModelAdmin):
     fieldsets = [
         ('teacher', {'fields': ['teacher']}),
         ('content', {'fields': ['content']}),
+        ('datetime', {'fields': ['datetime']}),
+
     ]
 
 

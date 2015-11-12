@@ -12,7 +12,7 @@ from Student.models import Student
 
 class StudentList(models.Model):
     # The model of each student's true information.
-    ID = models.CharField(max_length=10)                # 学生学号
+    studentID = models.CharField(max_length=10)         # 学生学号
     name = models.CharField(max_length=10)              # 学生真实姓名
     grade = models.PositiveIntegerField()               # 学生年级
     gender = models.BooleanField()                      # 学生性别
@@ -23,9 +23,15 @@ class Message(models.Model):
     content = models.TextField()                        # 消息内容
     teacher = models.ForeignKey(Teacher)                # 教师
     student = models.ForeignKey(Student)                # 学生
+    datetime = models.DateTimeField()                   # 日期时间
 
 
 class OpenMessage(models.Model):
     # The model of message which are seen to all users.
     content = models.TextField()                        # 消息内容
     teacher = models.ForeignKey(Teacher)                # 消息发出者(教师)
+    datetime = models.DateTimeField()                   # 日期时间
+
+
+class Agenda(models.Model):
+    pass

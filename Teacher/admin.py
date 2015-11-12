@@ -19,6 +19,11 @@ class TeacherAdmin(admin.ModelAdmin):
         ('name', {'fields': ['name']}),
         ('password', {'fields': ['password']}),
         ('email', {'fields': ['email']}),
+        ('age', {'fields': ['age']}),
+        ('gender', {'fields': ['gender']}),
+        ('introduction', {'fields': ['introduction']}),
+        ('lab', {'fields': ['lab']}),
+        ('subject', {'fields': ['subject']}),
     ]
 
 

@@ -50,33 +50,18 @@
 		<div class="span1">
 		</div>
 		<div class="span6">
-			<h2>
-				标题
-			</h2>
+            {% for message in messages %}
 			<p>
-				本可视化布局程序在HTML5浏览器上运行更加完美, 能实现自动本地化保存, 即使关闭了网页, 下一次打开仍然能恢复上一次的操作.
+				{{ message.teacher.name }}:
 			</p>
 			<p>
-				<a class="btn" href="#">查看更多 »</a>
-			</p>
-			<h2>
-				标题
-			</h2>
-			<p>
-				本可视化布局程序在HTML5浏览器上运行更加完美, 能实现自动本地化保存, 即使关闭了网页, 下一次打开仍然能恢复上一次的操作.
+				{{ message.content }}
 			</p>
 			<p>
-				<a class="btn" href="#">查看更多 »</a>
+				发表于:{{ message.datetime }}
 			</p>
-			<h2>
-				标题
-			</h2>
-			<p>
-				本可视化布局程序在HTML5浏览器上运行更加完美, 能实现自动本地化保存, 即使关闭了网页, 下一次打开仍然能恢复上一次的操作.
-			</p>
-			<p>
-				<a class="btn" href="#">查看更多 »</a>
-			</p>
+                <br>
+            {% endfor %}
 		</div>
 		<div class="span3">
 		</div>

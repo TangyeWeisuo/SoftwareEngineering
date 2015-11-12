@@ -11,20 +11,19 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Lab',
+            name='Student',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=20)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Teacher',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('username', models.CharField(max_length=10)),
+                ('password', models.CharField(max_length=15)),
+                ('email', models.EmailField(max_length=20)),
                 ('name', models.CharField(max_length=10)),
                 ('age', models.PositiveIntegerField(verbose_name=0)),
                 ('gender', models.BooleanField()),
-                ('photo', models.FileField(upload_to=b'')),
+                ('introduction', models.TextField()),
+                ('major', models.CharField(max_length=10)),
+                ('grade', models.PositiveIntegerField()),
+                ('GPA', models.FloatField(verbose_name=0)),
             ],
         ),
     ]
