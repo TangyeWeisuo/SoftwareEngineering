@@ -16,6 +16,7 @@ class Teacher(models.Model):
     username = models.CharField(max_length=10)                          # 用户名
     password = models.CharField(max_length=15)                          # 密码
     email = models.EmailField(max_length=20)                            # 邮箱
+    phone = models.CharField(max_length=11)                             # 手机号
     name = models.CharField(max_length=10)                              # 教师姓名
     age = models.PositiveIntegerField()                                 # 教师年龄
     gender = models.BooleanField()                                      # 教师性别

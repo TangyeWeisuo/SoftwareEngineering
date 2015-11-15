@@ -127,31 +127,24 @@
         <data-type>varchar(20)</data-type>
       </column>
       <column id="42" parent="5" name="name">
-        <mandatory>1</mandatory>
         <data-type>varchar(10)</data-type>
       </column>
       <column id="43" parent="5" name="age">
-        <mandatory>1</mandatory>
         <data-type>int(10) unsigned</data-type>
       </column>
       <column id="44" parent="5" name="gender">
-        <mandatory>1</mandatory>
         <data-type>tinyint(1)</data-type>
       </column>
       <column id="45" parent="5" name="introduction">
-        <mandatory>1</mandatory>
         <data-type>longtext</data-type>
       </column>
       <column id="46" parent="5" name="major">
-        <mandatory>1</mandatory>
         <data-type>varchar(10)</data-type>
       </column>
       <column id="47" parent="5" name="grade">
-        <mandatory>1</mandatory>
         <data-type>int(10) unsigned</data-type>
       </column>
       <column id="48" parent="5" name="GPA">
-        <mandatory>1</mandatory>
         <data-type>double</data-type>
       </column>
       <key id="49" parent="5" name="PRIMARY">

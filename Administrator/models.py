@@ -34,4 +34,9 @@ class OpenMessage(models.Model):
 
 
 class Agenda(models.Model):
-    pass
+    # The model of agenda : {student} make an appointment with {teacher}
+    # on {day}(0 for Monday, 1 for Tuesday and so on) at {period}(0 for 8:00 ~ 9:30 and so on)
+    teacher = models.ForeignKey(Teacher)
+    student = models.ForeignKey(Student)
+    day = models.PositiveIntegerField()
+    period = models.PositiveIntegerField()

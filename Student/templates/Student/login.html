@@ -19,10 +19,10 @@
 <br>
 <h1> 欢迎！请登录</h1>
 
-<form   action="../enterin/"	  method="post" >
+<form   action="{% url 'log' %}"	  method="post" >
         
          
-         <p> 学号<input type="text" name="studentnumber"   />  	<br></p>
+         <p> 用户名<input type="text" name="username"   />  	<br></p>
          <p> 密码<input type="password" name="password"   />	<br></p>  
          
 		 
@@ -31,7 +31,7 @@
 </form>
 <br>
 <br>
-<form  action="../apd/">
+<form  action="{% url 'register' %}">
          
             
             <input type="submit" value="注册" />       
