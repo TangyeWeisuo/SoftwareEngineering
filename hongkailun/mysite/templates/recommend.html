@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+{% for teacher in teachers %}
+<a href="/information/?name={{teacher}}">{{teacher}}</a>
+	{% endfor %}
+
+<p align="center">     
+        <form action="/information/" method="get">
+        <input name="choice" type="radio" checked="checked" value="老师" />老师 
+        <input name="choice" type="radio" value="实验室" />实验室         
+        <input type="text" name="name">
+        <input type="submit" value="Search">
+        </form>
+</p>
+
+
+</body>
+</html>
