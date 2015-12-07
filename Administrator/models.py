@@ -40,3 +40,8 @@ class Agenda(models.Model):
     student = models.ForeignKey(Student)
     day = models.PositiveIntegerField()
     period = models.PositiveIntegerField()
+
+
+class Favorite(models.Model):
+    student = models.ForeignKey(Student, related_name='fs')
+    teacher = models.ForeignKey(Teacher, related_name='ft')
