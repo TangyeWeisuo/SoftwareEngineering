@@ -20,7 +20,7 @@ class Teacher(models.Model):
     name = models.CharField(max_length=10)                              # 教师姓名
     age = models.PositiveIntegerField()                                 # 教师年龄
     gender = models.BooleanField()                                      # 教师性别
-    photo = models.FileField()                                          # 教师照片
+    # photo = models.FileField()                                          # 教师照片
     introduction = models.TextField()                                   # 教师简介
     foundation = models.TextField()                                     # 教师基金
     subject = models.CharField(max_length=10)                           # 教师教学科目

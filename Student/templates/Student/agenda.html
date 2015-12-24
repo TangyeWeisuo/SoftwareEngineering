@@ -88,120 +88,44 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="success">
-						<td>
-							8:00-9:45
-						</td>
-                        {% for item in time1 %}
-                            {% ifequal item 0 %}
+                    {% for period in table %}
+                        <tr>
+                        {% for item in period %}
+                            {% ifequal forloop.counter0 0 %}
                                 <td>
-                                可预约
+                                    {{ item }}
                                 </td>
-                            {% endifequal %}
-                            {% ifequal item 1 %}
-                                <td>
-                                已预约
-                                </td>
-                            {% endifequal %}
-                            {% ifequal item 2 %}
-                                <td>
-                                不可预约
-                                </td>
-                            {% endifequal %}
-                        {% endfor %}
-					</tr>
-					<tr class="error">
-						<td>
-							10:00-11:45
-						</td>
-                        {% for item in time2 %}
-                            {% ifequal item 0 %}
-                                <td>
-                                可预约
-                                </td>
-                            {% endifequal %}
-                            {% ifequal item 1 %}
-                                <td>
-                                已预约
-                                </td>
-                            {% endifequal %}
-                            {% ifequal item 2 %}
-                                <td>
-                                不可预约
-                                </td>
+                            {% else %}
+                                <form method="post">
+                                {% csrf_token %}
+                                {% for info in item %}
+                                    {% ifequal forloop.counter0 0 %}
+                                        {% ifequal info 0 %}
+                                            <td>
+                                                <button type="submit" class="btn">可预约</button>
+                                        {% endifequal %}
+                                        {% ifequal info 1 %}
+                                            <td>
+                                                已预约
+                                        {% endifequal %}
+                                        {% ifequal info 2 %}
+                                            <td>
+                                                不可预约
+                                        {% endifequal %}
+                                    {% else %}
+                                        <input type="hidden" name='pe' value={{ info }}>
+                                        </td>
+                                    {% endifequal %}
+                                {% endfor %}
+                                </form>
                             {% endifequal %}
                         {% endfor %}
-					</tr>
-					<tr class="warning">
-						<td>
-							13:45-15:30
-						</td>
-						{% for item in time3 %}
-                            {% ifequal item 0 %}
-                                <td>
-                                可预约
-                                </td>
-                            {% endifequal %}
-                            {% ifequal item 1 %}
-                                <td>
-                                已预约
-                                </td>
-                            {% endifequal %}
-                            {% ifequal item 2 %}
-                                <td>
-                                不可预约
-                                </td>
-                            {% endifequal %}
-                        {% endfor %}
-					</tr>
-					<tr class="info">
-						<td>
-							15:45-17:30
-						</td>
-						{% for item in time4 %}
-                            {% ifequal item 0 %}
-                                <td>
-                                可预约
-                                </td>
-                            {% endifequal %}
-                            {% ifequal item 1 %}
-                                <td>
-                                已预约
-                                </td>
-                            {% endifequal %}
-                            {% ifequal item 2 %}
-                                <td>
-                                不可预约
-                                </td>
-                            {% endifequal %}
-                        {% endfor %}
-					</tr>
-					<tr>
-						<td>
-							18:30-20:15
-						</td>
-						{% for item in time5 %}
-                            {% ifequal item 0 %}
-                                <td>
-                                可预约
-                                </td>
-                            {% endifequal %}
-                            {% ifequal item 1 %}
-                                <td>
-                                已预约
-                                </td>
-                            {% endifequal %}
-                            {% ifequal item 2 %}
-                                <td>
-                                不可预约
-                                </td>
-                            {% endifequal %}
-                        {% endfor %}
-					</tr>
+                        </tr>
+                    {% endfor %}
 				</tbody>
 			</table>
+            <!--
             <form class="form-horizontal" method="post">
-                        {% csrf_token %}
 						<div class="control-group">
 							<div class="controls">
                                 Day:<input type="text" name="day">
@@ -218,6 +142,7 @@
 							</div>
 						</div>
 					</form>
+            -->
 		</div>
 	</div>
 

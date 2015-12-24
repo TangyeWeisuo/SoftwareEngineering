@@ -14,4 +14,4 @@ class Student(models.Model):
     introduction = models.TextField()                       # 学生简介
     major = models.CharField(max_length=10)                 # 学生专业
     grade = models.PositiveIntegerField()                   # 学生年级
-    GPA = models.FloatField(verbose_name=0)                 # 学生成绩
+    # GPA = models.FloatField(verbose_name=0)                 # 学生成绩

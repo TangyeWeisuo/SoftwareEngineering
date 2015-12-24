@@ -1,0 +1,93 @@
+<meta charset="utf-8"/>
+<html>
+<head>
+<meta charset="utf-8"/>
+<script type="text/javascript" src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/jquery-ui"></script>
+<link href="http://www.francescomalagrino.com/BootstrapPageGenerator/3/css/bootstrap-combined.min.css" rel="stylesheet" media="screen">
+<script type="text/javascript" src="http://www.francescomalagrino.com/BootstrapPageGenerator/3/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="row-fluid">
+				<div class="span4">
+				</div>
+				<div class="span4">
+				</div>
+				<div class="span4">
+					<ul class="nav nav-pills">
+						<li class="active">
+							<a href="#">首页</a>
+						</li>
+						<li>
+							<a href="#">资料</a>
+						</li>
+						<li class="disabled">
+							<a href="#">信息</a>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span2">
+			<ul class="nav nav-list">
+				<li class="nav-header">
+					列表标题
+				</li>
+				<li class="active">
+					<a href="#">首页</a>
+				</li>
+				<li>
+					<a href="#">库</a>
+				</li>
+				<li>
+					<a href="#">应用</a>
+				</li>
+			</ul>
+		</div>
+		<div class="span10">
+			<img alt="200x200" src="img/a.jpg" />
+			<dl>
+				<dt>
+					{{ teacher.name }}
+				</dt>
+				<dd>
+					{{ teacher.introduction}}
+				</dd>
+          <dt>
+    				性别
+				</dt>
+				<dt>
+    				{{ teacher.gender }}
+				</dt>
+          <dt>
+    				年龄
+				</dt>
+				<dt>
+    				{{ teacher.age }}
+				</dt>
+				<dd>
+					{{ teacher.lab.name }}
+				</dd>
+				<dt>
+					联系方式
+				</dt>
+				<dd>
+			办公地点: 
+        综合楼2楼
+        联系电话: 86413080
+        E-mail: sdl@hit.edu.cn
+				</dd>
+			</dl> <p>
+						<a class="btn btn-primary" href="#">选择老师</a> <a class="btn" href="/recommend/">返回</a>
+					</p>
+		</div>
+	</div>
+</div>
+</body>
+</html>

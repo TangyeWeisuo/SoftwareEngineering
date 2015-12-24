@@ -70,7 +70,7 @@ def login(request):
 
                 user = models.Student.objects.filter(username=username, password=password)
                 if user:
-                    response = HttpResponseRedirect('/student/home/0/')
+                    response = HttpResponseRedirect('/student/home/0')
                     response.set_cookie('username', username, 3600)
                     return response
                 else:
@@ -86,9 +86,10 @@ def agenda(request, selected):
     user = request.COOKIES.get('username')
     if user:
         if request.method == 'POST':
-            day = request.POST['day']
-            period = request.POST['period']
-            if models.Agenda.objects.filter(day=day, period=period, teacher=selected):
+            pe = int(request.POST['pe'])
+            day = pe % 7
+            period = pe / 7
+            if models.Agenda.objects.filter(day=day, period=period, student=user):
                 return HttpResponse("Existed.")
             else:
                 agd = models.Agenda(
@@ -98,41 +99,37 @@ def agenda(request, selected):
                     period=period,
                 )
                 agd.save()
-        bulldog0 = [0, 0, 0, 0, 0, 0, 0]
-        bulldog1 = [0, 0, 0, 0, 0, 0, 0]
-        bulldog2 = [0, 0, 0, 0, 0, 0, 0]
-        bulldog3 = [0, 0, 0, 0, 0, 0, 0]
-        bulldog4 = [0, 0, 0, 0, 0, 0, 0]
+
         table = []
-        table.append(bulldog0)
-        table.append(bulldog1)
-        table.append(bulldog2)
-        table.append(bulldog3)
-        table.append(bulldog4)
+        for i in range(0, 5):
+            table.append([])
+        table[0].append('8:00-9:45')
+        table[1].append('10:00-11:45')
+        table[2].append('13:45-15:30')
+        table[3].append('15:45-17:30')
+        table[4].append('18:30-20:15')
+        for i in range(0, 5):
+            for j in range(0, 7):
+                table[i].append([])
+                table[i][j+1].append(0)
+                table[i][j+1].append(i*7+j)
+
         super_student = models.Student.objects.get(id=9999)
         selection = models.Teacher.objects.get(id=selected)
         items = models.Agenda.objects.filter(teacher=selection)
+
         for item in items:
             if item.student == super_student:
-                table[item.period][item.day] = 2
+                table[item.period][item.day+1][0] = 2
             else:
-                table[item.period][item.day] = 1
-        for item in table[2]:
-            print item
-        print '--'
-        for item in table[3]:
-            print item
+                table[item.period][item.day+1][0] = 1
         context = {
-            'time1': table[0],
-            'time2': table[1],
-            'time3': table[2],
-            'time4': table[3],
-            'time5': table[4]}
+            'table': table,
+                        }
 
         return render_to_response('Student/agenda.html', context, context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect('/student/login/')
-
 
 def teacher(request, selected):
     pass
@@ -151,3 +148,26 @@ def favorite(request):
         return render_to_response('Student/favorite.html', context, context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect('/login/')
+
+
+def date(request):
+    user = request.COOKIES.get('username')
+    if user:
+        if request.method == 'POST':
+            the_teacher = request.POST.get('teacher')
+            the_day = request.POST.get('day')
+            the_period = request.POST.get('period')
+            tc = models.Teacher.objects.get(username=the_teacher)
+            usr = models.Student.objects.get(username=user)
+            item = models.Agenda.objects.get(teacher=tc, student=usr, day=the_day, period=the_period)
+            item.delete()
+        stu = models.Student.objects.get(username=user)
+        dt = models.Agenda.objects.filter(student=stu)
+        context = {'list': dt}
+        return render_to_response('Student/date.html', context, context_instance=RequestContext(request))
+    else:
+        return HttpResponseRedirect('/login/')
+
+
+def msg(request):
+    pass

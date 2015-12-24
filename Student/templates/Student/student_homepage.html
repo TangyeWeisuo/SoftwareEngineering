@@ -37,17 +37,17 @@
 	<div class="row-fluid">
 		<div class="span2">
 			<ul class="nav nav-list">
-                <li class="active">
-					<a href="#">教师消息</a>
+				<li class="active">
+					<a href="{% url 'home' 0 %}">消息一览</a>
+				</li>
+                <li>
+					<a href="{% url 'msg' %}">订阅消息</a>
 				</li>
 				<li>
-					<a href="{% url 'favorite' %}">我的关注</a>
+					<a href="{% url 'favorite' %}">我的订阅</a>
 				</li>
 				<li>
-					<a href="#">预约情况</a>
-				</li>
-				<li>
-					<a href="#">教师日程</a>
+					<a href="{% url 'date' %}">预约情况</a>
 				</li>
 			</ul>
 		</div>
