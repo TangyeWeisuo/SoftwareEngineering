@@ -1,0 +1,143 @@
+<html>
+<head>
+{% load staticfiles %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>教师搜索</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-theme.css' %}">
+    <script type="text/javascript" src={% static "jquery.min.js" %}></script>
+    <script type="text/javascript" src={% static "bootstrap.min.js" %}></script>
+    <!--alt-->
+</head>
+
+<body>
+<div class="container" style="background-color: #eee" id="MD">
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+			<h1 class="header" style="text-align:center">
+				教师搜索
+			</h1>
+		</div>
+        <div class="col-md-1">
+		</div>
+		<div class="col-md-3">
+            <div class="row">
+                <ul class="nav nav-pills">
+                    <li class="active" >
+                        <a href="{% url 'home' 1 %}">首页</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'studentview' %}">资料</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}">退出</a>
+                    </li>
+                </ul>
+            </div>
+		</div>
+	</div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><span class="sr-only"></span></div>
+            </div>
+        </div>
+    </div>
+
+	<div class="row">
+		<div class="col-md-2">
+			<ul class="nav nav-pills nav-stacked">
+				<li>
+					<a href="{% url 'home' 1 %}">消息一览</a>
+				</li>
+                <li>
+					<a href="{% url 'msg' 1 %}">订阅消息</a>
+				</li>
+				<li>
+					<a href="{% url 'favorite' %}">我的订阅</a>
+				</li>
+				<li>
+					<a href="{% url 'date' %}">预约情况</a>
+				</li>
+                <li class="active">
+					<a href="{% url 'search' %}">教师搜索</a>
+				</li>
+			</ul>
+		</div>
+
+        <div class="col-md-1">
+        </div>
+
+		<div class="col-md-9">
+
+			<img alt="200x200" src="img/a.jpg" />
+			<dl>
+				<dt>
+					{{ teacher.name }}
+				</dt>
+
+                <dt>
+                教师简介：
+                </dt>
+
+				<dt>
+                    {{ teacher.introduction}}
+				</dt>
+
+				<dt>
+    				性别：
+                    {% if teacher.gender %}
+                         男
+                    {% else %}
+                        女
+                    {% endif %}
+				</dt>
+
+				<dt>
+    				年龄：{{ teacher.age }}
+				</dt>
+
+				<dt>
+					实验室:{{ teacher.lab.name }}
+				</dt>
+
+				<dt>
+					联系方式：{{ teacher.phone }}
+				</dt>
+			</dl>
+
+            <p>
+                <form method="post">
+                    <input type="hidden" name='usrname' value={{teacher.username}}>
+                    <button type="submit" class="btn btn-primary">选择</button>
+                    <a class="btn btn-primary" href="{% url 'search' %}">返回</a>
+                </form>
+
+            </p>
+		</div>
+	</div>
+
+        </div>
+	</div>
+
+</div>
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4 aligned">
+            <p style="text-align: center">
+			<strong>Contact with us:</strong>
+			<strong>zhaoxihang@gmail.com</strong>
+		    </p>
+        </div>
+		<div class="col-md-4">
+		</div>
+</div>
+
+</body>
+</html>

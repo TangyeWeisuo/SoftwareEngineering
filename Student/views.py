@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+import sys
 from django.shortcuts import render, render_to_response
 from django.http import *
 from django.http import *
@@ -8,6 +9,8 @@ from . import *
 from django.template import RequestContext
 from Administrator import models
 from django import forms
+reload(sys)
+sys.setdefaultencoding('utf-8')
 # Create your views here.
 
 
@@ -23,12 +26,91 @@ class RegisterForm(forms.Form):
     check = forms.CharField(label='确认密码', widget=forms.PasswordInput())
 
 
-def home(request, index):
+def home(request, current):
     user = request.COOKIES.get('username')
     if user:
+        NUM = 10
+        index = []
+        current = int(current)
         messages = models.OpenMessage.objects.all()
-        context = {'messages': messages}
+        total = len(messages)
+        pages = total / NUM
+        if total % NUM != 0:
+            pages += 1
+
+        i = -2
+        while i <= 2:
+            if 1 <= current + i <= pages:
+                index.append(current + i)
+            i += 1
+
+        first = [1]
+        last = [pages]
+
+        begin = (current - 1) * NUM
+        end = min(NUM * current - 1, total - 1)
+        begin = total - begin
+        end = total - end
+        show = []
+        for i in range(begin - 1, end - 2, -1):
+            show.append(messages[i])
+
+        context = {'messages': show,
+                   'current': current,
+                   'index': index,
+                   'first': first,
+                   'last': last,
+                   }
         return render(request, 'Student/student_homepage.html', context)
+    else:
+        return HttpResponseRedirect('/student/login/')
+
+
+def msg(request, current):
+    user = request.COOKIES.get('username')
+    if user:
+        NUM = 10
+        index = []
+        current = int(current)
+        stu = models.Student.objects.get(username=user)
+        fav = models.Favorite.objects.filter(student=stu)
+        ms = models.OpenMessage.objects.all()
+        messages = []
+        for item in ms:
+            for favor in fav:
+                if item.teacher == favor.teacher:
+                    messages.append(item)
+
+        total = len(messages)
+        pages = total / NUM
+        if total % NUM != 0:
+            pages += 1
+
+        i = -2
+        while i <= 2:
+            if 1 <= current + i <= pages:
+                index.append(current + i)
+            i += 1
+
+        first = [1]
+        last = [pages]
+
+        begin = (current - 1) * NUM
+        end = min(NUM * current - 1, total - 1)
+        begin = total - begin
+        end = total - end
+        show = []
+        for i in range(begin - 1, end - 2, -1):
+            print i
+            show.append(messages[i])
+
+        context = {'messages': show,
+                   'current': current,
+                   'index': index,
+                   'first': first,
+                   'last': last,
+                   }
+        return render(request, 'Student/subscribe.html', context)
     else:
         return HttpResponseRedirect('/student/login/')
 
@@ -52,6 +134,8 @@ def register(request):
                     return HttpResponseRedirect('/student/login/')
                 else:
                     return HttpResponseRedirect('/student/register/')
+        else:
+            return HttpResponseRedirect('/student/login/')
     else:
         rf = RegisterForm()
     return render_to_response('Student/register.html', {'rf': rf}, context_instance=RequestContext(request))
@@ -70,7 +154,7 @@ def login(request):
 
                 user = models.Student.objects.filter(username=username, password=password)
                 if user:
-                    response = HttpResponseRedirect('/student/home/0')
+                    response = HttpResponseRedirect('/student/home/1')
                     response.set_cookie('username', username, 3600)
                     return response
                 else:
@@ -125,6 +209,7 @@ def agenda(request, selected):
                 table[item.period][item.day+1][0] = 1
         context = {
             'table': table,
+            'selected': selected,
                         }
 
         return render_to_response('Student/agenda.html', context, context_instance=RequestContext(request))
@@ -140,14 +225,17 @@ def favorite(request):
     if user:
         stu = models.Student.objects.get(username=user)
         favors = models.Favorite.objects.filter(student=stu)
-        teachers = list({})
-        for favor in favors:
-            teachers.append(favor.teacher)
-            print favor.teacher.age
-        context = {'teachers': teachers}
-        return render_to_response('Student/favorite.html', context, context_instance=RequestContext(request))
+        if favors:
+            teachers = []
+            for favor in favors:
+                teachers.append(favor.teacher)
+                print favor.teacher.age
+            context = {'teachers': teachers}
+            return render_to_response('Student/favorite.html', context, context_instance=RequestContext(request))
+        else:
+            return HttpResponseRedirect('/student/search')
     else:
-        return HttpResponseRedirect('/login/')
+        return HttpResponseRedirect('/student/login/')
 
 
 def date(request):
@@ -166,8 +254,264 @@ def date(request):
         context = {'list': dt}
         return render_to_response('Student/date.html', context, context_instance=RequestContext(request))
     else:
-        return HttpResponseRedirect('/login/')
+        return HttpResponseRedirect('/student/login/')
 
 
-def msg(request):
-    pass
+def recommend(request):
+    user = request.COOKIES.get('username')
+    if user:
+        teacher_lst = models.Teacher.objects.all()
+        teacher_ = []
+        lab = []
+        for t in teacher_lst:
+            if not t.lab.name in lab:
+                teacher_.append(t)
+                lab.append(t.lab.name)
+            else:
+                pass
+
+        if request.method == 'POST':
+            usrname = request.POST.get('usrname')
+            stu = models.Student.objects.get(username=user)
+            tc = models.Teacher.objects.get(username=usrname)
+            if not models.Favorite.objects.filter(student=stu, teacher=tc):
+                fav = models.Favorite(
+                    teacher=tc,
+                    student=stu
+                )
+                fav.save()
+
+        return render_to_response('Student/search.html', {'teachers': teacher_})
+    else:
+        return HttpResponseRedirect('/student/login/')
+
+
+def choice_search(request):
+    user = request.COOKIES.get('username')
+    if user:
+        if 'choice' in request.GET and request.GET['choice']:
+            cho = request.GET['choice']
+            t = "老师"
+            if cmp(cho, t) == 0:
+                if 'name' in request.GET and request.GET['name']:
+                    name = request.GET['name']
+                    try:
+                        t = models.Teacher.objects.get(name=name)
+                        return render_to_response('Student/information.html',
+                                   {'teacher': t})
+                    except:
+                        return render_to_response('Student/failed.html')
+            else:
+                if 'name' in request.GET and request.GET['name']:
+                        name = request.GET['name']
+                        try:
+                            l = models.Lab.objects.get(name=name)
+                            t = l.teacher_set.all()
+                            return render_to_response('Student/lab_teacher.html',
+                                       {'teachers': t, 'lab': l})
+                        except:
+                            return render_to_response('Student/failed.html')
+
+    else:
+        return HttpResponseRedirect('/student/login/')
+
+
+def teacher_information(request, selected):
+    user = request.COOKIES.get('username')
+    if user:
+        teacher_ = models.Teacher.objects.get(pk=selected)
+        if request.method == 'POST':
+            usrname = request.POST.get('usrname')
+            stu = models.Student.objects.get(username=user)
+            tc = models.Teacher.objects.get(username=usrname)
+            if not models.Favorite.objects.filter(student=stu, teacher=tc):
+                fav = models.Favorite(
+                    teacher=tc,
+                    student=stu
+                )
+                fav.save()
+        return render_to_response('Student/information.html',
+                                    {'teacher': teacher_})
+    else:
+        return HttpResponseRedirect('/student/login')
+
+
+
+def logout(request):
+    user = request.COOKIES.get('username')
+    if user:
+        response = HttpResponseRedirect('/student/login')
+        response.delete_cookie('username')
+        return response
+    else:
+        return HttpResponseRedirect('/student/login')
+
+
+def studentview(request):
+    user = request.COOKIES.get('username')
+    if user:
+        student = models.Student.objects.get(username=user)
+        if request.POST:
+            student.password = request.POST.get('password')
+            student.email = request.POST.get('email')
+            student.name = request.POST.get('name')
+            student.age = request.POST.get('age')
+            student.introduction = request.POST.get('introduction')
+            student.major = request.POST.get('major')
+            student.grade = request.POST.get('grade')
+            student.GPA = request.POST.get('GPA')
+            if request.POST.get('gender') == 'M':
+                student.gender = True
+            else:
+                student.gender = False
+
+            student.save()
+        return render_to_response('Student/studentview.html', {'student': student})
+    else:
+        return HttpResponseRedirect('/student/login/')
+
+
+def tinfo(request, selected):
+    user = request.COOKIES.get('username')
+    if user:
+        tc = models.Teacher.objects.get(id=selected)
+        return render_to_response('Student/TeacherInformation.html', {'teacher': tc, 'selected': selected})
+    else:
+        return HttpResponseRedirect('/student/login/')
+
+
+def tmessage(request, selected, current):
+    user = request.COOKIES.get('username')
+    if user:
+        tc = models.Teacher.objects.get(id=selected)
+        OpenMessages = models.OpenMessage.objects.filter(teacher=tc)
+
+        NUM = 10
+        index = []
+        current = int(current)
+        total = len(OpenMessages)
+        pages = total / NUM
+        if total % NUM != 0:
+            pages += 1
+
+        i = -2
+        while i <= 2:
+            if 1 <= current + i <= pages:
+                index.append(current + i)
+            i += 1
+
+        first = [1]
+        last = [pages]
+
+        begin = (current - 1) * NUM
+        end = min(NUM * current - 1, total - 1)
+        begin = total - begin
+        end = total - end
+        show = []
+        for i in range(begin - 1, end - 2, -1):
+            show.append(OpenMessages[i])
+
+        return render_to_response('Student/TeacherHomepage.html', {'current': current,
+                                                          'index': index,
+                                                          'teacher': teacher,
+                                                          'first': first,
+                                                          'last': last,
+                                                          'openmessages': show,
+                                                          'selected': selected,})
+    else:
+        return HttpResponseRedirect("/student/login/")
+
+
+def tboard(request, selected, current):
+    user = request.COOKIES.get('username')
+    if user:
+        tc = models.Teacher.objects.get(id=selected)
+        OpenMessages = models.LeaveWord.objects.filter(teacher=tc)
+
+        NUM = 10
+        index = []
+        current = int(current)
+        total = len(OpenMessages)
+        pages = total / NUM
+        if total % NUM != 0:
+            pages += 1
+
+        i = -2
+        while i <= 2:
+            if 1 <= current + i <= pages:
+                index.append(current + i)
+            i += 1
+
+        first = [1]
+        last = [pages]
+
+        begin = (current - 1) * NUM
+        end = min(NUM * current - 1, total - 1)
+        begin = total - begin
+        end = total - end
+        show = []
+        for i in range(begin - 1, end - 2, -1):
+            show.append(OpenMessages[i])
+
+        return render_to_response('Student/TeacherHomepage.html', {'current': current,
+                                                          'index': index,
+                                                          'teacher': teacher,
+                                                          'first': first,
+                                                          'last': last,
+                                                          'openmessages': show,
+                                                          'selected': selected,})
+    else:
+        return HttpResponseRedirect("/student/login/")
+
+
+def tboard(request, selected, current):
+    user = request.COOKIES.get('username')
+    if user:
+        tc = models.Teacher.objects.get(id=selected)
+        usr = models.Student.objects.get(username=user)
+
+        new = models.LeaveWord(
+            teacher=tc,
+            writer=usr,
+        )
+
+        if request.method == 'POST':
+            new.content = request.POST.get('content')
+            new.save()
+
+        messages = models.LeaveWord.objects.filter(teacher=tc)
+
+        NUM = 10
+        index = []
+        current = int(current)
+        total = len(messages)
+        pages = total / NUM
+        if total % NUM != 0:
+            pages += 1
+
+        i = -2
+        while i <= 2:
+            if 1 <= current + i <= pages:
+                index.append(current + i)
+            i += 1
+
+        first = [1]
+        last = [pages]
+
+        begin = (current - 1) * NUM
+        end = min(NUM * current - 1, total - 1)
+        begin = total - begin
+        end = total - end
+        show = []
+        for i in range(begin - 1, end - 2, -1):
+            show.append(messages[i])
+        return render_to_response('Student/TeacherMessageBoard.html',{'current': current,
+                                                              'selected': selected,
+                                                              'index': index,
+                                                              'teacher': teacher,
+                                                              'first': first,
+                                                              'last': last,
+                                                              'new': new,
+                                                              'messages': messages})
+    else:
+        return HttpResponseRedirect("/student/login")

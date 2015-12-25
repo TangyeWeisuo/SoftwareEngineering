@@ -3,6 +3,7 @@ from django.db import models
 # from Teacher import *
 # from Student import *
 from Teacher.models import Teacher
+from Teacher.models import Lab
 from Student.models import Student
 
 
@@ -45,3 +46,11 @@ class Agenda(models.Model):
 class Favorite(models.Model):
     student = models.ForeignKey(Student, related_name='fs')
     teacher = models.ForeignKey(Teacher, related_name='ft')
+
+
+class LeaveWord(models.Model):
+    # The model of message which are seen to all users.
+    content = models.TextField()                        #留言内容
+    teacher = models.ForeignKey(Teacher)
+    writer = models.ForeignKey(Student)                 #留言者
+    datetime = models.DateTimeField(auto_now=True)                   # 日期时间

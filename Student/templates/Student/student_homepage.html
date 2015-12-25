@@ -1,47 +1,62 @@
 <html>
 <head>
 {% load staticfiles %}
-<meta charset="UTF-8">
-<script type="text/javascript" src={% static "jquery-2.0.0.min.js" %}></script>
-<script type="text/javascript" src={% static "jquery-ui" %}></script>
-<link href={% static "bootstrap-combined.min.css" %} rel="stylesheet" media="screen">
-<script type="text/javascript" src={% static "bootstrap.min.js" %}></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>学生首页</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-theme.css' %}">
+    <script type="text/javascript" src={% static "jquery.min.js" %}></script>
+    <script type="text/javascript" src={% static "bootstrap.min.js" %}></script>
+    <!--alt-->
 </head>
+
 <body>
-<div class="container-fluid" id="MD">
-	<div class="row-fluid">
-		<div class="span4">
+<div class="container" style="background-color: #eee" id="MD">
+	<div class="row">
+		<div class="col-md-4">
 		</div>
-		<div class="span4">
-			<h3>
+		<div class="col-md-4">
+			<h1 class="header" style="text-align:center">
 				学生首页
-			</h3>
-			<p>
-				<embed height="0" id="xunlei_com_thunder_helper_plugin_d462f475-c18e-46be-bd10-327458d045bd" type="application/thunder_download_plugin" width="0" />
-			</p>
+			</h1>
 		</div>
-		<div class="span4">
-			<ul class="nav nav-tabs">
-				<li class="active">
-					<a href="#">首页</a>
-				</li>
-				<li>
-					<a href="#">资料</a>
-				</li>
-				<li class="disabled">
-					<a href="#">信息</a>
-				</li>
-			</ul>
+        <div class="col-md-1">
+		</div>
+		<div class="col-md-3">
+            <div class="row">
+                <ul class="nav nav-pills">
+                    <li class="active" >
+                        <a href="{% url 'home' 1 %}">首页</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'studentview' %}">资料</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}">退出</a>
+                    </li>
+                </ul>
+            </div>
 		</div>
 	</div>
-	<div class="row-fluid">
-		<div class="span2">
-			<ul class="nav nav-list">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><span class="sr-only"></span></div>
+            </div>
+        </div>
+    </div>
+
+	<div class="row">
+		<div class="col-md-2">
+			<ul class="nav nav-pills nav-stacked">
 				<li class="active">
-					<a href="{% url 'home' 0 %}">消息一览</a>
+					<a href="{% url 'home' 1 %}">消息一览</a>
 				</li>
                 <li>
-					<a href="{% url 'msg' %}">订阅消息</a>
+					<a href="{% url 'msg' 1 %}">订阅消息</a>
 				</li>
 				<li>
 					<a href="{% url 'favorite' %}">我的订阅</a>
@@ -49,70 +64,87 @@
 				<li>
 					<a href="{% url 'date' %}">预约情况</a>
 				</li>
+                <li>
+					<a href="{% url 'search' %}">教师搜索</a>
+				</li>
 			</ul>
 		</div>
-		<div class="span1">
+
+		<div class="col-md-1">
 		</div>
-		<div class="span6">
+
+		<div class="col-md-6">
             {% for message in messages %}
-			<p>
-				{{ message.teacher.name }}:
-			</p>
-			<p>
-				{{ message.content }}
-			</p>
-			<p>
-				发表于:{{ message.datetime }}
-			</p>
-                <br>
+            <div class="alert alert-info" role="alert">
+                <p>
+                    <strong>{{ message.teacher.name }}:</strong>
+                </p>
+                <p class="">
+                    {{ message.content }}
+                </p>
+                <p class="text-right">
+                    发表于:{{ message.datetime }}
+                </p>
+                    <br>
+            </div>
             {% endfor %}
 		</div>
-		<div class="span3">
+
+        <div class="col-md-3">
+        </div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+
+		<div class="col-md-4">
+            <nav class="text-center">
+                <ul class="pagination pagination-small">
+                    {% for item in first %}
+                    <li>
+                        <a href="{% url 'home' item %}">首页</a>
+                    </li>
+                    {% endfor %}
+                        {% for item in index %}
+                            <li>
+                                {% ifequal item current %}
+                                    <li class="active">
+                                        <a href="{% url 'home' item %}">{{ item }}</a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href="{% url 'home' item %}">{{ item }}</a>
+                                    </li>
+                                {% endifequal %}
+                            </li>
+                        {% endfor %}
+                    {% for item in last %}
+                    <li>
+                        <a href="{% url 'home' item %}">尾页</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+		</div>
+		<div class="col-md-4">
 		</div>
 	</div>
-	<div class="row-fluid">
-		<div class="span4">
-		</div>
-		<div class="span4">
-			<div class="pagination pagination-small">
-				<ul>
-					<li>
-						<a href="#">上一页</a>
-					</li>
-					<li>
-						<a href="#">1</a>
-					</li>
-					<li>
-						<a href="#">2</a>
-					</li>
-					<li>
-						<a href="#">3</a>
-					</li>
-					<li>
-						<a href="#">4</a>
-					</li>
-					<li>
-						<a href="#">5</a>
-					</li>
-					<li>
-						<a href="#">下一页</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<div class="span4">
-		</div>
-	</div>
-	<div class="row-fluid">
-		<div class="span4">
-		</div>
-		<div class="span4">
-			<strong>Contanct with us:</strong>
-			<strong>Email:zhaoxihang@gmail.com</strong>
-		</div>
-		<div class="span4">
-		</div>
-	</div>
+
 </div>
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4 aligned">
+            <p style="text-align: center">
+			<strong>Contact with us:</strong>
+			<strong>zhaoxihang@gmail.com</strong>
+		    </p>
+        </div>
+		<div class="col-md-4">
+		</div>
+</div>
+
 </body>
 </html>

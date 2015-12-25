@@ -1,70 +1,67 @@
 <html>
 <head>
 {% load staticfiles %}
-<meta charset="UTF-8">
-<script type="text/javascript" src={% static "jquery-2.0.0.min.js" %}></script>
-<script type="text/javascript" src={% static "jquery-ui" %}></script>
-<link href={% static "bootstrap-combined.min.css" %} rel="stylesheet" media="screen">
-<script type="text/javascript" src={% static "bootstrap.min.js" %}></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>学生注册</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-theme.css' %}">
+    <script type="text/javascript" src={% static "jquery.min.js" %}></script>
+    <script type="text/javascript" src={% static "bootstrap.min.js" %}></script>
+    <!--alt-->
+    <link href="{% static 'signin.css' %}" rel="stylesheet">
 </head>
 <body>
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span12">
-			<div class="row-fluid">
-				<div class="span3">
-				</div>
-				<div class="span6">
-					<h3 class="text-center">
-						学生注册
-					</h3>
-				</div>
-				<div class="span3">
-				</div>
-			</div>
-			<div class="row-fluid">
-				<div class="span3">
-				</div>
-				<div class="span6">
-					<form class="form-horizontal" method="post">
-                        {% csrf_token %}
-						<div class="control-group">
-							 <label class="control-label" for="inputEmail">学号</label>
-							<div class="controls">
-								{{ rf.username }}
-							</div>
-						</div>
-						<div class="control-group">
-							 <label class="control-label" for="inputEmail">Email</label>
-							<div class="controls">
-								{{ rf.email }}
-							</div>
-						</div>
-						<div class="control-group">
-							 <label class="control-label" for="inputPassword">密码</label>
-							<div class="controls">
-								{{ rf.password }}
-							</div>
-						</div>
-						<div class="control-group">
-							 <label class="control-label" for="inputPassword">确认密码</label>
-							<div class="controls">
-								{{ rf.check }}
-							</div>
-						</div>
-                        <div class="control-group">
-							<div class="controls">
-                                <button type="submit" class="btn" name="register">注册</button>
-							</div>
-						</div>
-						
-					</form>
-				</div>
-				<div class="span3">
-				</div>
-			</div>
-		</div>
+<div class="container">
+	<div class="signin">
+		<form class='form-signin'method="post">
+			{% csrf_token %}
+            <h2 class="form-signin-heading">学生注册</h2>
+            <div>
+                <label class="sr-only" for="inputEmail">学号</label>
+                学号
+                <div class="form-control">
+                    {{ rf.username }}
+                </div>
+            </div>
+
+            <div>
+                <label class="sr-only" for="inputEmail">Email</label>
+                Email
+                <div class="form-control">
+                    {{ rf.email }}
+                </div>
+            </div>
+
+            <div>
+                <label class="sr-only" for="inputEmail">密码</label>
+                密码
+                <div class="form-control">
+                    {{ rf.password }}
+                </div>
+            </div>
+
+            <div>
+                <label class="sr-only" for="inputEmail">确认密码</label>
+                确认密码
+                <div class="form-control">
+                    {{ rf.check }}
+                </div>
+            </div>
+
+            <div>
+                <div class="controls">
+                    <button type="submit" class="btn btn-lg btn-primary" name="register">注册</button>
+                    <button type="submit" class="btn btn-lg btn-primary" name="back">返回</button>
+
+                </div>
+            </div>
+        </form>
+
+
 	</div>
 </div>
 </body>
+
 </html>

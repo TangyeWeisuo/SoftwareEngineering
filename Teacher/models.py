@@ -1,4 +1,4 @@
-# -*-coding:utf-8-*-
+# -*- coding: cp936 -*-
 from django.db import models
 
 # Create your models here.
@@ -6,24 +6,23 @@ from django.db import models
 
 class Lab(models.Model):
     # The model of laboratory.
-    name = models.CharField(max_length=20)                              # 实验室名称
-    introduction = models.TextField()                                   # 实验室简介
-    photo = models.FilePathField()                                      # 实验室照片
+    name = models.CharField(max_length=20)
+    introduction = models.TextField()
 
 
 class Teacher(models.Model):
     # The model of teacher.
-    username = models.CharField(max_length=10)                          # 用户名
-    password = models.CharField(max_length=15)                          # 密码
-    email = models.EmailField(max_length=30)                            # 邮箱
-    # phone = models.CharField(max_length=11)                             # 手机号
-    name = models.CharField(max_length=10)                              # 教师姓名
-    age = models.PositiveIntegerField()                                 # 教师年龄
-    gender = models.BooleanField()                                      # 教师性别
-    # photo = models.FileField()                                          # 教师照片
-    introduction = models.TextField()                                   # 教师简介
-    foundation = models.TextField()                                     # 教师基金
-    subject = models.CharField(max_length=10)                           # 教师教学科目
-    lab = models.ForeignKey(Lab)                                        # 教师所属实验室
+    username = models.CharField(max_length=10)
+    password = models.CharField(max_length=15)
+    email = models.EmailField(max_length=20,null=True)
+    name = models.CharField(max_length=30,null=True)
+    age = models.PositiveIntegerField(verbose_name=0, null=True)
+    gender = models.BooleanField(default=1)
+    photo = models.ImageField(upload_to='img', null=True)
+    introduction = models.TextField(null=True)
+    foundation = models.TextField(null=True)
+    subject = models.CharField(max_length=10, null=True)
+    lab = models.ForeignKey(Lab, null=True)
+
 
 

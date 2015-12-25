@@ -19,22 +19,19 @@
 						<div class="nav-collapse collapse navbar-responsive-collapse">
 							<ul class="nav">
 								<li>
-									<a href="#">教师主页</a>
+									<a href="{% url 'tmessage' selected 1 %}">教师主页</a>
 								</li>
 								<li>
-									<a href="#">教师信息</a>
+									<a href="{% url 'ttinfo' selected %}">教师信息</a>
 								</li>
 								<li class="active">
-									<a href="#">教师日程</a>
+									<a href="{% url 'teacher' selected %}">教师日程</a>
 								</li>
 								<li>
-									<a href="#">留言板</a>
+									<a href="{% url 'tboard' selected 1 %}">留言板</a>
 								</li>
-							</ul>
+
 							<ul class="nav pull-right">
-								<li>
-									<a href="#">退出登录</a>
-								</li>
 								<li class="divider-vertical">
 								</li>
 							</ul>

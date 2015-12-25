@@ -1,0 +1,38 @@
+# -*- coding: cp936 -*-
+from django.db import models
+
+# Create your models here.
+
+
+class Lab(models.Model):
+    # The model of laboratory.
+    name = models.CharField(max_length=20)  # 实验室名称
+    introduction = models.TextField()       # 实验室简介
+    #photo = models.FilePathField()          # 实验室照片
+
+
+class Teacher(models.Model):
+    # The model of teacher.
+    username = models.CharField(max_length=10)              # 用户名
+    password = models.CharField(max_length=15)              # 密码
+    email = models.EmailField(max_length=20,null=True)                # 邮箱
+    name = models.CharField(max_length=30,null=True)                  # 教师姓名
+    age = models.PositiveIntegerField(verbose_name=0,null=True)       # 教师年龄
+    gender = models.BooleanField()                          # 教师性别
+    photo = models.ImageField(upload_to='img',null=True)              # 教师照片
+    introduction = models.TextField(null=True)                       # 教师简介
+    foundation = models.TextField(null=True)                         # 教师基金
+    subject = models.CharField(max_length=10,null=True)               # 教师教学科目
+    lab = models.ForeignKey(Lab,null=True)                            # 教师所属实验室
+    def __unicode__(self):
+	    return self.name
+
+class OpenMessage(models.Model):
+    # The model of message which are seen to all users.
+    content = models.TextField()                        #消息内容
+    writer = models.ForeignKey(Teacher)                        #消息发出者
+
+class LeaveWord(models.Model):
+    # The model of message which are seen to all users.
+    content = models.TextField()                        #留言内容
+    writer = models.ForeignKey(Teacher)                        #留言者

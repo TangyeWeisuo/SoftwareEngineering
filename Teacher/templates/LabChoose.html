@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+ </head>
+ <body>
+ <h1 align="center">选择实验室</h1>
+ <div id="" class="" align="center">
+ <table align="center">
+  <tr>
+	<td>实验室名称</td>
+	<td>实验室介绍</td>
+	<td>实验室ID</td>
+  </tr>
+  
+  {% for lab in lab_list %}
+  <tr>
+	<td>{{lab.name}}</td>
+	<td>{{lab.introduction}}</td>
+	<td>{{lab.id}}</td>
+	<td>
+	<form method="post" action="">
+	  <input type="hidden" name="choose" value="{{lab.id}}"><input type="submit" value="选择">
+	</form>
+	</td>
+  </tr>
+  {% endfor %}
+  <tr>
+	<form method="post" action="/CreateLab/">
+		<input type="submit" name="createlab" value="创建实验室">
+	</form>
+  </tr>
+ </table>
+ </div>
+ </p>
+ <center> <form method="post" action="{% url 'TeacherChangeInformation' %}">
+	<input type="submit" value="返回">
+ </form>
+ </body>
+</html>

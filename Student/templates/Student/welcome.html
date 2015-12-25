@@ -1,0 +1,31 @@
+<html>
+<head>
+    {% load staticfiles %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>教师信息管理系统</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-theme.css' %}">
+    <script type="text/javascript" src={% static "jquery.min.js" %}></script>
+    <script type="text/javascript" src={% static "bootstrap.min.js" %}></script>
+<!--alt-->
+    <link rel="stylesheet" href="{% static 'starter-template.css' %}">
+</head>
+
+<body>
+<div class="container">
+    <div class="starter-template">
+
+    <h1>欢迎来到教师信息管理系统</h1>
+    <p>信息查询，消息发布，见面预约</p>
+    <br>
+    <br>
+    <p><a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">学生登陆</a></p>
+    <br>
+    <p><a class="btn btn-success btn-lg" href="#" role="button">教师登陆</a></p>
+
+    </div>
+</div>
+</body>
+</html>

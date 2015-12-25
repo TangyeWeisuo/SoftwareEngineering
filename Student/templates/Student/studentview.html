@@ -1,0 +1,146 @@
+<html>
+<head>
+{% load staticfiles %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>个人信息</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-theme.css' %}">
+    <script type="text/javascript" src={% static "jquery.min.js" %}></script>
+    <script type="text/javascript" src={% static "bootstrap.min.js" %}></script>
+    <!--alt-->
+</head>
+
+<body>
+<div class="container" style="background-color: #eee" id="MD">
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+			<h1 class="header" style="text-align:center">
+				个人信息
+			</h1>
+		</div>
+        <div class="col-md-1">
+		</div>
+		<div class="col-md-3">
+            <div class="row">
+                <ul class="nav nav-pills">
+                    <li>
+                        <a href="{% url 'home' 1 %}">首页</a>
+                    </li>
+                    <li class="active">
+                        <a href="{% url 'studentview' %}">资料</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}">退出</a>
+                    </li>
+                </ul>
+            </div>
+		</div>
+	</div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><span class="sr-only"></span></div>
+            </div>
+        </div>
+    </div>
+
+	<div class="row">
+		<div class="col-md-2">
+			<ul class="nav nav-pills nav-stacked">
+				<li class="active">
+					<a href="{% url 'home' 1 %}">消息一览</a>
+				</li>
+                <li>
+					<a href="{% url 'msg' 1 %}">订阅消息</a>
+				</li>
+				<li>
+					<a href="{% url 'favorite' %}">我的订阅</a>
+				</li>
+				<li>
+					<a href="{% url 'date' %}">预约情况</a>
+				</li>
+                <li>
+					<a href="{% url 'search' %}">教师搜索</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="col-md-1">
+		</div>
+
+		<div class="col-md-6">
+			<form method="post" class="text-center">
+				<dl>
+				<dt>
+					用户：<input type="text" name="username" readonly value="{{student.username}}" >
+				</dt>
+				<dt>
+					密码：<input type="password" name="password" value="{{student.password}}">
+				</dt>
+				<dt>
+					邮箱：<input type="text" name="email" value="{{student.email}}">
+				</dt>
+				<dt>
+					姓名：<input type="text" name="name" value="{{student.name}}">
+				</dt>
+				<dt>
+					年龄：<input type="text" name="age" value="{{student.age}}">
+				</dt>
+
+				<dt>
+					专业：<input type="text" name="major" value="{{student.major}}">
+				</dt>
+				<dt>
+					年级：<input type="text" name="grade" value="{{student.grade}}">
+				</dt>
+				<dt>
+					成绩：<input type="text" name="GPA" value="{{student.GPA}}">
+				</dt>
+				<dt>
+					学生性别：男
+					{% ifequal student.gender True %}
+					<input type="radio" name="gender" value="M" checked='True'>女<input type="radio" name="gender" value="F" >
+					{% else %}
+					<input type="radio" name="gender" value="M" >女<input type="radio" name="gender" value="F" checked='True'>
+					{% endifequal %}
+				</dt>
+				<dt>
+					学生简介:
+					<dd>
+					<textarea name="introduction" rows="" cols="">{{student.introduction}}</textarea>
+					</dd>
+				</dt>
+				<dd>
+				<input type="submit" value="修改">
+				</dd>
+			</dl>
+			</form>
+		</div>
+
+		<div class="col-md-3">
+		</div>
+	</div>
+
+	</div>
+
+</div>
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4 aligned">
+            <p style="text-align: center">
+			<strong>Contact with us:</strong>
+			<strong>zhaoxihang@gmail.com</strong>
+		    </p>
+        </div>
+		<div class="col-md-4">
+		</div>
+</div>
+
+</body>
+</html>

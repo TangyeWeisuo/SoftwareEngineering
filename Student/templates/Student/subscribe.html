@@ -1,0 +1,150 @@
+<html>
+<head>
+{% load staticfiles %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>订阅消息</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-theme.css' %}">
+    <script type="text/javascript" src={% static "jquery.min.js" %}></script>
+    <script type="text/javascript" src={% static "bootstrap.min.js" %}></script>
+    <!--alt-->
+</head>
+
+<body>
+<div class="container" style="background-color: #eee" id="MD">
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+			<h1 class="header" style="text-align:center">
+				订阅消息
+			</h1>
+		</div>
+        <div class="col-md-1">
+		</div>
+		<div class="col-md-3">
+            <div class="row">
+                <ul class="nav nav-pills">
+                    <li class="active" >
+                        <a href="{% url 'home' 1 %}">首页</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'studentview' %}">资料</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}">退出</a>
+                    </li>
+                </ul>
+            </div>
+		</div>
+	</div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><span class="sr-only"></span></div>
+            </div>
+        </div>
+    </div>
+
+	<div class="row">
+		<div class="col-md-2">
+			<ul class="nav nav-pills nav-stacked">
+				<li>
+					<a href="{% url 'home' 1 %}">消息一览</a>
+				</li>
+                <li class="active">
+					<a href="{% url 'msg' 1 %}">订阅消息</a>
+				</li>
+				<li>
+					<a href="{% url 'favorite' %}">我的订阅</a>
+				</li>
+				<li>
+					<a href="{% url 'date' %}">预约情况</a>
+				</li>
+                <li>
+					<a href="{% url 'search' %}">教师搜索</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="col-md-1">
+		</div>
+
+		<div class="col-md-6">
+            {% for message in messages %}
+            <div class="alert alert-info" role="alert">
+                <p>
+                    <strong>{{ message.teacher.name }}:</strong>
+                </p>
+                <p class="">
+                    {{ message.content }}
+                </p>
+                <p class="text-right">
+                    发表于:{{ message.datetime }}
+                </p>
+                    <br>
+            </div>
+            {% endfor %}
+		</div>
+
+        <div class="col-md-3">
+        </div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+
+		<div class="col-md-4">
+            <nav class="text-center">
+                <ul class="pagination pagination-small">
+                    {% for item in first %}
+                    <li>
+                        <a href="{% url 'msg' item %}">首页</a>
+                    </li>
+                    {% endfor %}
+                        {% for item in index %}
+                            <li>
+                                {% ifequal item current %}
+                                    <li class="active">
+                                        <a href="{% url 'msg' item %}">{{ item }}</a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                        <a href="{% url 'msg' item %}">{{ item }}</a>
+                                    </li>
+                                {% endifequal %}
+                            </li>
+                        {% endfor %}
+                    {% for item in last %}
+                    <li>
+                        <a href="{% url 'msg' item %}">尾页</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
+
+</div>
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4 aligned">
+            <p style="text-align: center">
+			<strong>Contact with us:</strong>
+			<strong>zhaoxihang@gmail.com</strong>
+		    </p>
+        </div>
+		<div class="col-md-4">
+		</div>
+</div>
+
+</body>
+</html>
